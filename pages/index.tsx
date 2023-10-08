@@ -33,7 +33,7 @@ export default function Home() {
 
 
 
-  const handelSubmit = async (data:FormData)=>{
+  const handleSubmit = async (data:FormData)=>{
     try{
       create(data)
     }
@@ -61,13 +61,16 @@ export default function Home() {
     <div className="w-1/3 pl-8">
         <div className="mt-8">
             <h2 className="text-2xl font-bold mb-4">Registration</h2>
-            <form className="space-y-4">
-                <input type="text" placeholder="Name" className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" value="" />
-                <input type="text" placeholder="Surname" className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" value="" />
-                <input type="text" placeholder="Class" className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" value="" />
+            <form className="space-y-4" onSubmit={e=>{
+                e.preventDefault()
+                handleSubmit(form)
+            }}>
+                <input type="text" placeholder="Name" className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" value={form.name} onChange={e => setForm({... form, name:e.target.value})}/>
+                <input type="text" placeholder="Surname" className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" value={form.surname} onChange={e => setForm({... form, surname:e.target.value})}/>
+                <input type="text" placeholder="Class" className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" value={form.classnum} onChange={e => setForm({... form, classnum:e.target.value})}/>
                 <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300">Submit</button>
             </form>
-        </div>
+        </div> 
     </div>
     </div>
 </main>
